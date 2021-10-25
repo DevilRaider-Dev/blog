@@ -1,7 +1,8 @@
 //import modules
 const express = require('express');
 require('dotenv').config();
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose')
+const Article = require('./models/article')
 
 //get port from env
 const port = process.env.PORT;
@@ -16,10 +17,10 @@ app.use(express.json());
 app.set('view engine', 'ejs')
 
 //init db connection and port listener
-MongoClient.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         app.listen(port, () => {
-            console.log(`listening at http://localhost:${port}`);
+            console.log(`db connected and listening at http://localhost:${port}`);
         })
     })
     .catch(err => {
@@ -29,9 +30,13 @@ MongoClient.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopol
 
 //router
 app.get('/', (req, res) => {
-    res.render('index.ejs', { title: 'Blog - Articles' })
+    Article.find().limit(10)
+        .then(articles => {
+            res.render('index', { title: 'Blog - Articles', articles })
+        })
+        .catch(err => console.log(err))
 });
 
 app.get('/new-article', (req, res) => {
-    res.render('pages/new-articles.ejs', { title: 'Blog - Add Article' })
+    res.render('pages/new-article.ejs', { title: 'Blog - Add Article' })
 })

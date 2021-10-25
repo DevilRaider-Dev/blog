@@ -16,7 +16,15 @@
         <h2>A few words about this blog platform, Ghost, and how this site was made</h2>
     </header>
     <main id="main-index">
-
+        <h2>All articles</h2>
+        <div id="main-index-articles">
+            <% articles.forEach(e => { %>
+            <a href="/article/<%= e._id %> " class="allArticles">
+                <img src="assets/img/<%= e.url%>" alt="<%= e.author %> ">
+                <p><%= e.title %> </p>
+            </a>
+            <% }) %>
+        </div>
     </main>
     <%- include ('./components/footer.ejs') %>
 </body>
