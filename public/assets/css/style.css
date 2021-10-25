@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 
 a {
@@ -12,6 +11,12 @@ a {
 a:hover {
     color: grey;
 }
+
+main {
+    text-align: center;
+}
+
+/* Navigation */
 
 #nav-container {
     height: 6vh;
@@ -37,6 +42,8 @@ a:hover {
 .nav-link-active {
     border-bottom: 2px solid #000;
 }
+
+/* Footer */
 
 #footer {
     background-color: #000;
@@ -69,6 +76,8 @@ a:hover {
 #footer-bottom p {
     font-size: calc(.2vw + .2vh + 1vmin);
 }
+
+/* Content */
 
 #header-index {
     width: 50vw;
@@ -105,4 +114,47 @@ a:hover {
 
 .allArticles img {
     width: 100%;
+}
+
+#read-article {
+    text-align: left;
+}
+
+#read-article h2 {
+    margin: 3vh auto 6vh;
+    font-size: calc(1vw + 1vh + 1vmin);
+}
+
+#read-article img {
+    width: 100%;
+    margin-bottom: 1vh;
+}
+
+#read-article article {
+    margin: 0 auto;
+    width: 40%;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding-bottom: 3%;
+}
+
+#read-article article figure {
+    margin-bottom: 3%;
+    display: flex;
+}
+
+#read-article article figure img {
+    width: 10%;
+}
+
+#read-article article figure figcaption {
+    padding-left: 5%;
+}
+
+#read-article article figure figcaption p span {
+    font-weight: bolder;
+}
+
+#resizable-textarea {
+    resize: vertical;
 }

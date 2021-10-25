@@ -11,7 +11,24 @@
 
 <body>
     <%- include ('../components/nav.ejs') %>
-
+    <main id="main-new">
+        <h2>ADD NEW ARTICLE</h2>
+        <form action="/new-article" method="post" enctype="multipart/form-data">
+            <!-- 
+                Title
+                Url Picture
+                Author
+                Author Picture
+                Text
+                Submit
+             -->
+            <input type="text" name="title" id="" placeholder="Title">
+            <input type="text" name="url" id="" placeholder="Url to Picture">
+            <input type="text" name="author" id="" placeholder="Author">
+            <input type="text" name="author_bild" id="" placeholder="Author Picture">
+            <input type="text" name="body" id="resizable-textarea" placeholder="Article Text">
+        </form>
+    </main>
     <%- include ('../components/footer.ejs') %>
 </body>
 

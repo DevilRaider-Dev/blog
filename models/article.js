@@ -14,7 +14,7 @@ const articleSchema = new Schema({
         type: String,
         required: true
     },
-    published_At: {
+    published_at: {
         type: String,
         required: true
     },

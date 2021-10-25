@@ -1,8 +1,9 @@
 //import modules
 const express = require('express');
-require('dotenv').config();
 const mongoose = require('mongoose')
+const formidable = require('formidable');
 const Article = require('./models/article')
+require('dotenv').config();
 
 //get port from env
 const port = process.env.PORT;
@@ -32,10 +33,27 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology
 app.get('/', (req, res) => {
     Article.find().limit(10)
         .then(articles => {
-            res.render('index', { title: 'Blog - Articles', articles })
+            res.render('index', { title: 'Blog - Home', articles })
         })
         .catch(err => console.log(err))
 });
+
+app.get('/articles', (req, res) => {
+    Article.find()
+        .then(articles => {
+            res.render('./pages/all', { title: 'Blog - All Articles', articles })
+        })
+        .catch(err => console.log(err))
+});
+
+app.get('/article/:id', (req, res) => {
+    Article.findById(req.params.id)
+        .then(article => {
+            console.log(article)
+            res.render('./pages/article', { title: 'Blog - Read Article', article })
+        })
+        .catch(err => console.log(err))
+})
 
 app.get('/new-article', (req, res) => {
     res.render('pages/new-article.ejs', { title: 'Blog - Add Article' })

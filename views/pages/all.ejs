@@ -10,13 +10,9 @@
 </head>
 
 <body>
-    <%- include ('./components/nav.ejs') %>
-    <header id="header-index">
-        <img src="assets/img/img1.jpg" alt="">
-        <h2>A few words about this blog platform, Ghost, and how this site was made</h2>
-    </header>
+    <%- include ('../components/nav.ejs') %>
     <main id="main-index">
-        <h2>Newest Articles</h2>
+        <h2>All articles</h2>
         <div id="main-index-articles">
             <% articles.forEach(e => { %>
             <a href="/article/<%= e._id %> " class="allArticles">
@@ -26,7 +22,7 @@
             <% }) %>
         </div>
     </main>
-    <%- include ('./components/footer.ejs') %>
+    <%- include ('../components/footer.ejs') %>
 </body>
 
 </html>

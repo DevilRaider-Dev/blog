@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title><%= title %> </title>
+</head>
+
+<body>
+    <%- include ('../components/nav.ejs') %>
+    <main id="read-article">
+        <h2><%= article.title %> </h2>
+        <img src="/assets/img/<%= article.url%>" alt="<%= article.author %> ">
+        <article>
+            <figure>
+                <img src="<%= article.author_bild %>" alt="<%= article.author %>">
+                <figcaption>
+                    <p><span><%= article.author %> </span></p>
+                    <p><%= article.published_at %> &#x22C5; <%= article.duration %> min read</p>
+                </figcaption>
+            </figure>
+            <p><%= article.body %> </p>
+        </article>
+    </main>
+    <%- include ('../components/footer.ejs') %>
+</body>
+
+</html>
