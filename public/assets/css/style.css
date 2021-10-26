@@ -49,6 +49,7 @@ main {
     background-color: #000;
     color: #fff;
     height: 40vh;
+    text-align: center;
 }
 
 #footer-top {
@@ -153,6 +154,18 @@ main {
 
 #read-article article figure figcaption p span {
     font-weight: bolder;
+}
+
+#main-new form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 3% 0;
+}
+
+#main-new form input, #main-new form textarea, #main-new form button {
+    margin: .3% 0;
+    width: 80%;
 }
 
 #resizable-textarea {

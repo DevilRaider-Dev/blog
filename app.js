@@ -5,6 +5,9 @@ const formidable = require('formidable');
 const Article = require('./models/article')
 require('dotenv').config();
 
+let date = new Date();
+let dateString = date.getMonth() + " " + date.getDay() + ", " + date.getFullYear()
+console.log(dateString)
 //get port from env
 const port = process.env.PORT;
 
@@ -38,7 +41,7 @@ app.get('/', (req, res) => {
         .catch(err => console.log(err))
 });
 
-app.get('/articles', (req, res) => {
+app.get('/all', (req, res) => {
     Article.find()
         .then(articles => {
             res.render('./pages/all', { title: 'Blog - All Articles', articles })
@@ -49,7 +52,6 @@ app.get('/articles', (req, res) => {
 app.get('/article/:id', (req, res) => {
     Article.findById(req.params.id)
         .then(article => {
-            console.log(article)
             res.render('./pages/article', { title: 'Blog - Read Article', article })
         })
         .catch(err => console.log(err))
@@ -58,3 +60,42 @@ app.get('/article/:id', (req, res) => {
 app.get('/new-article', (req, res) => {
     res.render('pages/new-article.ejs', { title: 'Blog - Add Article' })
 })
+
+app.post('/save-article', (req, res, next) => {
+    const form = formidable({ multiples: true, uploadDir: './public/assets/img/uploads', keepExtensions: true });
+
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            console.log(err)
+            next(err);
+            return;
+        }
+
+        let date = new Date();
+        let dateString = date.getMonth() + " " + date.getDay() + ", " + date.getFullYear()
+        console.log(dateString)
+
+        let url = "\\uploads\\" + files.url.path.split('\\').pop()
+
+        let newArticle = new Article({
+            title: fields.title,
+            url: url,
+            duration: fields.duration,
+            author: fields.author,
+            author_bild: fields.author_bild,
+            body: fields.body,
+            published_at: dateString
+        })
+
+        console.log(newArticle)
+
+        newArticle.save()
+            .then(result => {
+                console.log(result)
+                res.redirect('/all')
+            })
+            .catch(err => console.log(err))
+
+        // res.json({ fields, files });
+    });
+});
